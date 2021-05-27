@@ -1,15 +1,25 @@
 import { useEffect, useRef, useReducer } from 'react';
 
+interface InitialState {
+  status: string;
+  error: string | null;
+  data: unknown[]
+}
+
+interface Action {
+  type: string;
+  payload?: unknown[];
+}
 export const useFetch = (url: string) => {
   const cache = useRef({})
 
-  const initialState = {
+  const initialState: InitialState = {
 		status: 'idle',
 		error: null,
 		data: [],
 	};
 
-  const [state, dispatch] = useReducer((state, action) => {
+  const [state, dispatch] = useReducer((state: InitialState, action: Action) => {
 		switch (action.type) {
 			case 'FETCHING':
 				return { ...initialState, status: 'fetching' };

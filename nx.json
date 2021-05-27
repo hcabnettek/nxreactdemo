@@ -34,6 +34,9 @@
     },
     "store-custom-hooks": {
       "tags": []
+    },
+    "store-feature-game-detail": {
+      "tags": []
     }
   }
 }
