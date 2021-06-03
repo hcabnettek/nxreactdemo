@@ -15,14 +15,14 @@ import { Route, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 export const App = () => {
-  const [query, setQuery] = useState('ngs2yy0u3tkh');
+  const [query, setQuery] = useState('1prdegnktgl3');
   const url =
     query && `https://deckofcardsapi.com/api/deck/${query}/draw/?count=2`;
   const { status, data } = useFetch(url);
   const cards = data?.cards;
   const history = useHistory();
 
-  const [q2, setQ2] = useState('ngs2yy0u3tkh');
+  const [q2, setQ2] = useState('1prdegnktgl3');
   const url2 = q2 && `/api/games`;
   const { status: s2, data: d2 } = useFetch(url2);
   //: {value: string; suit: string; images: {svg: string;}}
@@ -39,7 +39,9 @@ export const App = () => {
             value: string;
             suit: string;
             images: { png: string };
-          }) => <img src={png} alt={`${value} ${suit}`} />
+          }) => (
+            <img src={png} alt={`${value} ${suit}`} key={`${value}-${suit}`} />
+          )
         )}
       <div className="container">
         <div className="games-layout">
