@@ -4,5 +4,6 @@ module.exports = {
     '<rootDir>/libs/store/shared-ui',
     '<rootDir>/libs/store/custom-hooks',
     '<rootDir>/libs/store/feature-game-detail',
+    '<rootDir>/apps/api',
   ],
 };

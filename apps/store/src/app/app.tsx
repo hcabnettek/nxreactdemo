@@ -10,30 +10,31 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-import { Route, Link, useHistory } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
-
-
 export const App = () => {
-
-  const [query, setQuery] = useState('546sq5x03xnv');
-  const url = query && `https://deckofcardsapi.com/api/deck/${query}/draw/?count=2`;
-  const { status, data: { cards } } = useFetch(url);
-
+  const [query, setQuery] = useState('4mpr1usekm72');
+  const url =
+    query && `https://deckofcardsapi.com/api/deck/${query}/draw/?count=2`;
+  const { status, data } = useFetch(url);
+  const cards = data?.cards;
   const history = useHistory();
+  console.log(cards);
   return (
     <>
-    <Header />
-    {status}
-    {Array.isArray(cards) && cards.map((card: {image: string; code: string; value: string; suit: string}) => (<img src={card.image} key={card.code} alt={`{card.value} of {card.suit}`} />))}
-    <button></button>
-    <div className="container">
-      <div className="games-layout">
-      {getAllGames().map((x) => (
-            <Card key={x.id} className="game-card" onClick={() => {
-              console.log('clicked');
-              history.push(`/game/${x.id}`)}}>
+      <Header />
+      <div className="container">
+        <div className="games-layout">
+          {getAllGames().map((x) => (
+            <Card
+              key={x.id}
+              className="game-card"
+              onClick={() => {
+                console.log('clicked');
+                history.push(`/game/${x.id}`);
+              }}
+            >
               <CardActionArea>
                 <CardMedia
                   className="game-card-media"
@@ -63,9 +64,9 @@ export const App = () => {
               </CardActionArea>
             </Card>
           ))}
+        </div>
       </div>
-    </div>
-    <Route path="/game/:id" component={StoreFeatureGameDetail} />
+      <Route path="/game/:id" component={StoreFeatureGameDetail} />
     </>
   );
 };
